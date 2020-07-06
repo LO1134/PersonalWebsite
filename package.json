@@ -1,0 +1,41 @@
+{
+  "name": "nodejs-Home_automation_site",
+  "version": "1.0.0",
+  "description": "Home automation site which can be configured",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "author": "Frits van Loon",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.3.1",
+    "connect-flash": "^0.1.1",
+    "csurf": "^1.10.0",
+    "date-time-picker": "^0.5.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-graphql": "^0.9.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.16.2",
+    "express-validator": "^6.2.0",
+    "graphql": "^14.6.0",
+    "html-to-image": "^0.1.1",
+    "jquery": ">=3.5.0",
+    "mqtt": "^3.0.0",
+    "multer": "^1.4.2",
+    "mysql2": "^1.6.1",
+    "node-html-to-image": "^1.2.0",
+    "nodemailer": "^6.4.6",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "npm": "^6.14.4",
+    "pug": "^2.0.3"
+  }
+}

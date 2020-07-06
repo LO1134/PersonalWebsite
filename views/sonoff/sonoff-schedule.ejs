@@ -1,0 +1,140 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity=`${process.env.INTEGRITY}` crossorigin="anonymous">
+   <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/css/sonoffschedule.css">
+    <link rel="stylesheet" href="/css/model.css">
+    <script type="text/javascript" src="/js/1.2.2/ng_all.js"></script>
+    <script type="text/javascript" src="/js/1.2.2/ng_ui.js"></script>
+    <script type="text/javascript" src="/js/1.2.2/components/timepicker.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+<main>
+<!-- <button class="btn btn-primary" onclick="openAreaToAddAnEvent()" id="addAnEvent" value="Click To Add an Event">Click To add an Event</button> -->
+<button class="btn btn-primary" id="addAnEventModalButton" value="Click To Add an Event">Click To add an Event</button>
+<!-- <div style="display:none;" id="AddAnEvent"> -->
+
+    <div id="backdrop"></div>
+    <div class="modal card" id="add-modal">
+      <div class="modal__content">
+
+    <form class="sonoff-schedule-list-display" 
+        action="/sonoff_schedules" method="POST" enctype="multipart/form-data"> 
+        <div class="weekDays-selector">
+            <label for="weekDays-selector" >Dagen van de week</label>
+            <input type="checkbox" id="weekday-ALL" name="weekday-ALL" class="weekday" />
+            <label for="weekday-ALL">All</label>
+            <input type="checkbox" id="weekday-mon" name="weekday-mon" class="weekday" />
+            <label for="weekday-mon">M</label>
+            <input type="checkbox" id="weekday-tue" name="weekday-tue" class="weekday" />
+            <label for="weekday-tue">T</label>
+            <input type="checkbox" id="weekday-wed" name="weekday-wed" class="weekday" />
+            <label for="weekday-wed">W</label>
+            <input type="checkbox" id="weekday-thu" name="weekday-thu" class="weekday" />
+            <label for="weekday-thu">T</label>
+            <input type="checkbox" id="weekday-fri" name="weekday-fri" class="weekday" />
+            <label for="weekday-fri">F</label>
+            <input type="checkbox" id="weekday-sat" name="weekday-sat" class="weekday" />
+            <label for="weekday-sat">S</label>
+            <input type="checkbox" id="weekday-sun" name="weekday-sun" class="weekday" />
+            <label for="weekday-sun">S</label>
+        </div>
+        <div class="sonoff-schedule-form-time">
+            <label for="tijdstip">Tijdstip</label>
+            <input 
+            class="<%= validationsErrors.find(e => e.param === 'tijdstip') ? 'invalid' : '' %>"
+            type="text" name="tijdstip" id="tijdstip">
+        </div> 
+        <div class="sonoff-schedule-form-action">
+            <label for="action">Action On or Off</label>
+            <select type="select" name="OnorOff" id="OnorOff" class="<%= validationsErrors.find(e => e.param === 'OnorOff') ? 'invalid' : 'sonoff-schedule-form-action-input'  %>">
+            <option value=""></option>
+            <option value="Aan">Aan</option>
+            <option value="Uit">Uit</option>
+        </select>
+        </div> 
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="sonoffId" value="<%= id %>">
+        <button class="btn btn-primary" type="submit">Add new schedule item</button>
+    </form>
+</div>
+<div class="modal__actions">
+  <button class="btn btn--passive">Cancel</button>
+</div>
+</div>
+
+<!-- </div> -->
+
+<hr>
+<% if (errorMessage) { %>
+    <div class="user-message user-message--error"><%= errorMessage %></div>
+<% } %>
+<% if (scheduleItems.length > 0) { %>
+
+        <% for (let scheduleItem of scheduleItems) { %>
+        <div class="sonoff-schedule-list-display">
+            <div class="sonoff-schedule-list-display-action ">
+                <img src=<% if (scheduleItem.onOrOff== 'Uit') { %>"/images/uit.jpg"<% } else { %>"/images/aan.jpg"<% } %>  
+                alt="<%= scheduleItem.onOrOff %>" width="42" height="42">
+            </div>
+            <div class="sonoff-schedule-list-display-tijdstip"> 
+                <%= scheduleItem.timeOfEvent %>
+            </div> 
+            <div class="sonoff-schedule-list-display-weekdays">
+                <label for="weekDays-selector" ></label>
+                <input type="checkbox" id="weekday-mon" <% if (scheduleItem.ma == 1) { %>checked<% } %> name="weekday-mon" class="weekday" />
+                <label for="weekday-mon">M</label>
+                <input type="checkbox" id="weekday-tue" <% if (scheduleItem.di == 1) { %>checked<% } %> name="weekday-tue" class="weekday" />
+                <label for="weekday-tue">T</label>
+                <input type="checkbox" id="weekday-wed" <% if (scheduleItem.wo == 1) { %>checked<% } %> name="weekday-wed" class="weekday" />
+                <label for="weekday-wed">W</label>
+                <input type="checkbox" id="weekday-thu" <% if (scheduleItem.do == 1) { %>checked<% } %> name="weekday-thu" class="weekday" />
+                <label for="weekday-thu">T</label>
+                <input type="checkbox" id="weekday-fri" <% if (scheduleItem.vr == 1) { %>checked<% } %> name="weekday-fri" class="weekday" />
+                <label for="weekday-fri">F</label>
+                <input type="checkbox" id="weekday-sat" <% if (scheduleItem.za == 1) { %>checked<% } %> name="weekday-sat" class="weekday" />
+                <label for="weekday-sat">S</label>
+                <input type="checkbox" id="weekday-sun" <% if (scheduleItem.zo == 1) { %>checked<% } %> name="weekday-sun" class="weekday" />
+                <label for="weekday-sun">S</label>
+            </div>
+            <div>
+            <label class="switch">
+                <input type="hidden" name="previousStatus" value="<%= scheduleItem.status %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="hidden" name="id" value="<%= scheduleItem.id %>">
+                <input type="checkbox" id="status" name="status" <% if (scheduleItem.status == 1) { %>checked<% } %> onclick="changeStatus(this)">
+                <span class="slider round"></span>
+              </label>
+            </div>              
+            <div class="card__actions">
+                <a href="/sonoff_schedules_delete/<%= scheduleItem.id %>" class="btn">Delete</a>
+            </div>
+
+            <div class="card__actions">
+                <a href="/sonoff_change/<%= scheduleItem.id %>" class="btn">Change</a>
+            </div>
+        </div>
+<hr>
+        <% } %>
+
+
+<% } else { %>
+    <h1>No Schedule Found!</h1>
+<% } %>
+
+
+
+
+</div>
+</main>
+
+<%- include('../includes/end.ejs') %>
+
+<script src="/js/schedular.js"></script> 
+
+
+

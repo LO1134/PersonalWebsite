@@ -1,0 +1,79 @@
+body {
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.site-form {
+  width: 30rem;
+  max-width: 100%;
+  margin: auto;
+  /* display: inline; */
+}
+
+.site-item {
+  width: 10rem;
+  max-width: 95%;
+  margin: 0.5rem;
+  margin-left: 0;
+  display: inline;
+  padding: 0;
+  float: left;
+  width: 15%;
+  background-color: white;
+}
+
+.site__title {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.site__description {
+  text-align: center;
+}
+
+#inloggers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 75%;
+}
+
+#inloggers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#inloggers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#inloggers tr:hover {
+  background-color: #ddd;
+}
+
+#inloggers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4caf50;
+  color: white;
+}
+table {
+  border: 1px solid #99ff99;
+  background-color: transparent;
+  color: black;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+}
+td {
+  border: 1px solid #99ff99;
+  text-align: left;
+}

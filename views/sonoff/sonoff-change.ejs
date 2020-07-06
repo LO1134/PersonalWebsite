@@ -1,0 +1,80 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity=`${process.env.INTEGRITY}` crossorigin="anonymous">
+   <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/css/sonoffchange.css">
+    <script type="text/javascript" src="/js/1.2.2/ng_all.js"></script>
+    <script type="text/javascript" src="/js/1.2.2/ng_ui.js"></script>
+    <script type="text/javascript" src="/js/1.2.2/components/timepicker.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+};
+</script>
+ 
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+<main>
+
+<% if (errorMessage) { %>
+<div class="user-message user-message--error"><%= errorMessage %></div>
+<% } %>
+<div id="backdrop"></div>
+<div class="modal card" id="add-modal">
+    <div class="modal__content">
+
+    <form class="sonoff-change-list-display" 
+        action="/sonoff_change/<%= id %>" method="POST" enctype="multipart/form-data"> 
+        <div class="sonoff-change-form-action">
+                <label for="action">Action On or Off</label>
+                <select type="select" name="OnorOff" id="OnorOff" class="sonoff-change-form-action-input">
+                <option value="Aan" <% if (changeItems[0].onOrOff == 'Aan') { %>selected<% } %> >Aan</option>
+                <option value="Uit" <% if (changeItems[0].onOrOff == 'Uit') { %>selected<% } %> >Uit</option>
+            </select>
+        </div>     
+        <div class="sonoff-change-form-time">
+                <label for="tijdstip">Tijdstip</label> 
+                <input 
+                class="<%= validationsErrors.find(e => e.param === 'tijdstip') ? 'invalid' : '' %>"
+                type="text" name="tijdstip" id="tijdstip" value="<%= changeItems[0].timeOfEvent %>">
+         </div>     
+        <div class="weekDays-selector">
+            <label for="weekDays-selector" >Dagen van de week</label>
+            <input type="checkbox" id="weekday-ALL" <% if (changeItems[0].day_ALL == 1) { %>checked<% } %> name="weekday-ALL" class="weekday" />
+            <label for="weekday-ALL">All</label>
+            <input type="checkbox" id="weekday-mon" <% if (changeItems[0].ma == 1) { %>checked<% } %> name="weekday-mon" class="weekday" />
+            <label for="weekday-mon">M</label>
+            <input type="checkbox" id="weekday-tue" <% if (changeItems[0].di == 1) { %>checked<% } %> name="weekday-tue" class="weekday" />
+            <label for="weekday-tue">T</label>
+            <input type="checkbox" id="weekday-wed" <% if (changeItems[0].wo == 1) { %>checked<% } %> name="weekday-wed" class="weekday" />
+            <label for="weekday-wed">W</label>
+            <input type="checkbox" id="weekday-thu" <% if (changeItems[0].do == 1) { %>checked<% } %> name="weekday-thu" class="weekday" />
+            <label for="weekday-thu">T</label>
+            <input type="checkbox" id="weekday-fri" <% if (changeItems[0].vr == 1) { %>checked<% } %> name="weekday-fri" class="weekday" />
+            <label for="weekday-fri">F</label>
+            <input type="checkbox" id="weekday-sat" <% if (changeItems[0].za == 1) { %>checked<% } %> name="weekday-sat" class="weekday" />
+            <label for="weekday-sat">S</label>
+            <input type="checkbox" id="weekday-sun" <% if (changeItems[0].zo == 1) { %>checked<% } %> name="weekday-sun" class="weekday" />
+            <label for="weekday-sun">S</label>
+        </div>
+        <div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="id" value="<%= id %>">
+            <button class="btn btn-primary" type="submit">change this schedule item</button>
+        </div>
+    </form>
+
+</div>
+<div class="modal__actions">
+  <button class="btn btn--passive">Cancel</button>
+</div>
+</div>
+
+</main>
+
+<%- include('../includes/end.ejs') %>
+<script src="/js/schedularchange.js"></script> 
+
+
+

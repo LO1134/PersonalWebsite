@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+main {
+  padding: 1rem;
+  margin: auto;
+}
+table {
+  width: 80%;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 5px;
+  text-align: left;
+}
+table#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+  background-color: #fff;
+}
+table#t01 th {
+  background-color: black;
+  color: white;
+}
+tfoot {
+  color: red;
+}
+td {
+  text-align: right;
+}
+th {
+  text-align: right;
+}
+.feedEkList {
+  width: 1190px;
+  list-style: none outside none;
+  background-color: #ffffff;
+  border: 1px solid #d3cad7;
+  padding: 4px 6px;
+  color: #3e3e3e;
+}
+.feedEkList li {
+  border-bottom: 1px solid #d3cad7;
+  padding: 5px;
+}
+.feedEkList li:last-child {
+  border-bottom: none;
+}
+.itemTitle a {
+  font-weight: bold;
+  color: #4ebaff !important;
+  text-decoration: none;
+}
+.itemTitle a:hover {
+  text-decoration: underline;
+}
+.itemDate {
+  font-size: 11px;
+  color: #aaaaaa;
+}

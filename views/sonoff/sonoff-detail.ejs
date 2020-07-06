@@ -1,0 +1,33 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/sonoff.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main class="centered">
+        <h1><%= sonoff.title %></h1>
+        <hr>
+        <div class="image">
+            <img src="/<%= sonoff.imageURL %>" alt="<%= sonoff.title %>">
+        </div>
+        <div>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="id" value="<%= sonoff.id %>">
+            <button class="btn" type="button" id="button_id" onclick="sendMQTTcommand(this)">Toggle light</button>
+        </div>
+        <!-- <h3 class="sonoff__status"> Status: <% if (sonoff.status) { %>Active<% } else { %>Not active<% } %></h3>         -->
+        <h3 class="sonoff__status"> Device_connection_Status: <% if (sonoff.deviceactive) { %>Connected<% } else { %>Not connected<% } %></h3>  
+        <h3>Device Name: <%= sonoff.devicename %></h3>
+        <h3 class="sonoff__description">Description: <%= sonoff.description %></h3>
+        <h3>Host:  <%= sonoff.host %></h3>
+        <h3>MQTT Topic: <%= sonoff.MQTTtopic %></h3>
+        <h3>MQTT Command: <%= sonoff.MQTTcommand %></h3>
+        <h3>MQTT CommandAAN: <%= sonoff.MQTTcommandAAN %></h3>
+        <h3>MQTT CommandUIT: <%= sonoff.MQTTcommandUIT %></h3>
+        <h3>Mosquitto command Aan: mosquitto_pub -h 192.168.178.51 -t <%= sonoff.MQTTtopic %> -m "<%= sonoff.MQTTcommandAAN %>"</h3>
+        <h4>Date added: <%= sonoff.date %></h4>
+    </main>
+<%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"></script>

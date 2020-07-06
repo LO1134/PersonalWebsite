@@ -1,0 +1,24 @@
+body {
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+table {
+  border: 1px solid #99ff99;
+  background-color: transparent;
+  color: black;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+}
+td {
+  border: 1px solid #99ff99;
+  text-align: left;
+}

@@ -1,0 +1,110 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/energielogging.css">
+    <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+    <title>Slimme meter uitlezen, vandaag</title>
+    <link rel="stylesheet" type="text/css"  href="/css/default.css">
+    <script src="/js/Rgraph/libraries/RGraph.common.core.js"></script>
+    <script src="/js/Rgraph/libraries/RGraph.bar.js"></script>              <!-- Just needed for Bar charts -->
+    <script src="/js/Rgraph/libraries/RGraph.common.dynamic.js"></script>   <!-- Just needed for dynamic features -->
+    <script src="/js/Rgraph/libraries/RGraph.common.annotate.js"></script>  <!-- Just needed for annotating -->
+    <script src="/js/Rgraph/libraries/RGraph.common.context.js"></script>   <!-- Just needed for context menus -->
+    <script src="/js/Rgraph/libraries/RGraph.common.effects.js"></script>   <!-- Just needed for visual effects -->
+    <script src="/js/Rgraph/libraries/RGraph.common.key.js"></script>       <!-- Just needed for keys -->
+    <script src="/js/Rgraph/libraries/RGraph.common.resizing.js"></script>  <!-- Just needed for resizing -->
+    <script src="/js/Rgraph/libraries/RGraph.common.tooltips.js"></script>  <!-- Just needed for tooltips -->
+    <script src="/js/Rgraph/libraries/RGraph.common.zoom.js"></script>      <!-- Just needed for zoom -->
+    <script src="/js/Rgraph/libraries/RGraph.line.js"></script>             <!-- Just needed for Line charts -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<div id='d1' style="position: absolute; top:170px; left:35px; z-index:1">  
+    <canvas id="cvs" width="981" height="509">[No canvas support]</canvas>
+</div> 
+  <script>
+    $(document).ready(function ()
+    {
+ 
+       new RGraph.Bar({ 
+        id: 'cvs',
+        data:[<% for(var i=0; i < grafiekdata.length; i++) { %>[<%= grafiekdata[i] %>],<% } %>],
+        options: {
+            labels: [<% for(var i=0; i < labels.length; i++) { %>'<%= labels[i] %>',<% } %>],
+            title: 'Energie per maand from jan 2017 - 2019 (kWh)',           
+            colors: ['red', 'green'],
+            hmargin: 3,
+            strokestyle: 'rgba(0,0,0,0)',
+            shadow: false,
+            clearto: 'white',
+            gutterBottom: 35,
+            gutterLeft: 35,
+            gutterRight: 35,          
+            variant: '2d',
+            noaxes: true,
+            textAccessible: true,
+            scaleZerostart: true              
+        }
+    }).draw();  
+   
+  
+    });
+</script>
+
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <%- include('../includes/navigation-energie.ejs') %>
+
+    <main>
+        <p>Last update: <%= LaatsteDatum %></p>
+     <section id='d2' style="position:absolute; top:675px; left:35px; z-index:1">
+            <p>
+                Vanaf jun 2016:
+               Verbruik: (<%= LastiAfgenomen %>
+               - <%= firstafgenomen %>) = <%= verschilafgenomen / 1000 %> kWatt, - <%= euroMin %> Euro
+            </p>
+            <p>   
+               Opgewekt: (<%= Lastipgewekt %>
+               -  <%= firstopgewekt %>) = <%= verschilopgewekt / 1000 %> kWatt, +<%= euroPlus %> Euro  
+            </p>
+    </section>
+
+    <section id='d3' style="position:absolute; top:780px; left:50px; z-index:1">
+    <table border="1" width="100%">
+   
+   <tr>
+   <th></th>
+   <th>Beginstand</th>
+   <th>Eindstand</th>
+   <th>2017</th>
+   <th>2018</th>
+   <th>2019</th>
+   <th>2020</th>
+    </tr>
+   <tr>
+   <th>Datum</th>
+   <th>01-01-2020</th>
+   <th><%= new Date(LaatsteDatum).toDateString(); %> </th>
+   </tr>
+   <tr>
+   <td>Afgenomen</td>
+   <td><%= JSON.stringify(jaardata[3].beginstandafgenomen) %></td>
+   <td><%= LastiAfgenomen %> </td>
+   <td><%= JSON.stringify(jaardata[0].afgenomen) %></td>
+   <td><%= JSON.stringify(jaardata[1].afgenomen) %></td>
+   <td><%= JSON.stringify(jaardata[2].afgenomen) %></td>
+   <td><%= eindstandafgenomen %> </td> 
+   </tr>
+   <tr>
+   <td>Opgewekt</td>
+   <td><%= JSON.stringify(jaardata[3].beginstandopgewekt) %></td>
+   <td><%= Lastipgewekt %> </td> 
+   <td><%= JSON.stringify(jaardata[0].opgewekt) %></td>
+   <td><%= JSON.stringify(jaardata[1].opgewekt) %></td>
+   <td><%= JSON.stringify(jaardata[2].opgewekt) %></td>
+   <td><%= eindstandopgewekt %></td>
+   </tr>
+   <tr>
+   </table>
+
+</section>
+    </main>
+<%- include('../includes/end.ejs') %>

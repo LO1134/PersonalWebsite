@@ -1,0 +1,293 @@
+.Generalform {
+  margin-bottom: 10px;
+  padding: 15px;
+  background-color: #5cb85c;
+}
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
+}
+
+.sonoff-change-form {
+  width: 100%;
+  height: 6rem;
+  background-color: cadetblue;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.sonoff-change-form-time {
+  flex: 0.8;
+  border: 1px solid #a1a1a1;
+  width: 4px;
+  font-size: 1.5 rem;
+  border: none;
+  margin: 5%;
+}
+
+.sonoff-change-form-action {
+  flex: 0.6;
+  border: 1px solid #a1a1a1;
+  font: inherit;
+  border: none;
+  margin: 2%;
+}
+
+.weekDays-selector input {
+  display: none !important;
+  margin: 5%;
+}
+
+.weekDays-selector label {
+  text-align: center;
+}
+
+.weekDays-selector {
+  flex: 2;
+}
+
+.weekDays-selector input[type="checkbox"] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 30px;
+  width: 20px;
+  margin-right: 3px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.weekDays-selector input[type="checkbox"]:checked + label {
+  background: #2ad705;
+  color: #ffffff;
+}
+
+.sonoff-change-list-display {
+  width: 100%;
+  height: 6rem;
+  background-color: cadetblue;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sonoff-change-list-display-weekdays {
+  flex: 1.5;
+}
+
+.sonoff-change-list-display-tijdstip {
+  flex: 0.5;
+  width: 30px;
+}
+.sonoff-change-list-display-action {
+  padding-left: 50px;
+  flex: 0.5;
+}
+
+.sonoff-change-list-display-weekdays input[type="checkbox"] + label {
+  display: inline-block;
+  border-radius: 6px;
+  background: #dddddd;
+  height: 30px;
+  width: 20px;
+  margin-right: 3px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.sonoff-change-list-display-weekdays input[type="checkbox"]:checked + label {
+  background: #2ad705;
+  color: #ffffff;
+}
+
+.sonoff-change-list-display-weekdays input {
+  display: none !important;
+  margin: 5%;
+}
+
+.sonoff-change-list-display-weekdays label {
+  text-align: center;
+}
+.modal .modal__content {
+  padding: 1rem;
+}
+
+.modal .modal__actions {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+#backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+  pointer-events: none;
+  display: block;
+}
+
+#add-modal .modal__content {
+  display: flex;
+  flex-direction: column;
+}
+* {
+  box-sizing: border-box;
+}
+
+input {
+  font: inherit;
+  border: 1px solid #ccc;
+  padding: 0.4rem 0.2rem;
+  color: #383838;
+}
+
+input:focus {
+  outline: none;
+  background: #fff1c4;
+}
+
+.btn {
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #00329e;
+  background: #00329e;
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
+
+.btn:hover,
+.btn:active {
+  background: #f67722;
+  border-color: #f67722;
+}
+
+.btn--passive {
+  color: cadetblue;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.btn--passive:hover,
+.btn--passive:active {
+  background: #aec6f8;
+}
+
+.btn--danger:hover,
+.btn--danger:active {
+  background: #ff3217;
+  border-color: #ff3217;
+}
+
+.modal {
+  position: fixed;
+  z-index: 10;
+  width: 100px;
+  top: 10vh;
+  left: 10%;
+  display: block;
+  height: 15vh;
+}
+
+button:focus {
+  outline: none;
+}
+
+.btn--danger {
+  background: #d30808;
+  color: white;
+  border-color: #d30808;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.modal.visible {
+  display: block;
+  animation: fade-slide-in 0.3s ease-out forwards;
+}
+
+#backdrop.visible {
+  display: block;
+  pointer-events: all;
+}
+
+@media screen and (max-width: 1700px) {
+  .modal {
+    width: 90%;
+    margin: 0px auto;
+    left: 10px;
+    height: 15rem;
+    /* height: 10rem; */
+  }
+  .weekDays-selector label {
+    display: block;
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .modal {
+    width: 90%;
+    margin: 0px auto;
+    left: 1px;
+    height: 10rem;
+    /* height: 10rem; */
+  }
+  .weekDays-selector label {
+    display: none;
+  }
+  .weekDays-selector {
+    flex: 2;
+  }
+
+  .weekDays-selector input[type="checkbox"] + label {
+    border-radius: 6px;
+    height: 30px;
+    width: 20px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .modal {
+    width: 100%;
+    margin: 0px auto;
+    left: 1px;
+    height: 10rem;
+    /* height: 10rem; */
+  }
+  .weekDays-selector label {
+    text-align: left;
+  }
+  .weekDays-selector {
+    flex: 1;
+  }
+
+  .weekDays-selector input[type="checkbox"] + label {
+    border-radius: 6px;
+    height: 30px;
+    width: 20px;
+  }
+}
+
+@keyframes fade-slide-in {
+  from {
+    transform: translateY(-5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

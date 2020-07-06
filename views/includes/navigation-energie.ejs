@@ -1,0 +1,62 @@
+<div class="backdrop"></div>
+<header class="main-header">
+  <button id="side-menu-toggle">Menu</button>
+  <nav class="main-header__nav">
+    <% if (isAuthenticated) { %>
+    <ul class="main-header__item-list">
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/energielogging' ? 'active' : '' %>"
+          href="/energielogging"
+          >Daily
+        </a>
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/energie_daily_overview' ? 'active' : '' %>"
+          href="/energie_daily_overview"
+          >This month
+        </a>
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/energie_monthly_overview' ? 'active' : '' %>"
+          href="/energie_monthly_overview"
+          >Per year
+        </a>
+      </li>
+      <li class="main-header__item">
+        <a class="" href="/">
+          Back
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
+
+<nav class="mobile-nav">
+  <ul class="mobile-nav__item-list">
+    <li class="main-header__item">
+      <a
+        class="<%= path === '/energielogging' ? 'active' : '' %>"
+        href="/energielogging"
+        >Daily
+      </a>
+    </li>
+    <li class="main-header__item">
+      <a
+        class="<%= path === '/energie_daily_overview' ? 'active' : '' %>"
+        href="/energie_daily_overview"
+        >This month
+      </a>
+    </li>
+    <li class="main-header__item">
+      <a
+        class="<%= path === '/energie_monthly_overview' ? 'active' : '' %>"
+        href="/energie_monthly_overview"
+        >Per year
+      </a>
+    </li>
+  </ul>
+</nav>

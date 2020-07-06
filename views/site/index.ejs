@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+<body style="background-image: url('<%= picture %>');">
+    <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <% if (sites.length > 0) { %>
+            <div class="grid">
+                <% for (let site of sites) { %>
+                    <article class="card site-item">
+                        <header class="card__header">
+                            <h1 class="site__title"><%= site.title %></h1>
+                        </header>
+                        <div class="card__image">
+                            <a href="<%= site.linkToWebPage  %>">
+                                <img src="/<%= site.imageURL %>"
+                                alt="<%= site.title %>">
+                            </a>
+                        </div>
+
+                        <div class="card__content">
+                            <p class="site__description"><%= site.description %></p>
+                        </div>
+                    </article>
+                <% } %>
+            </div>
+            <div>
+                <%- include('../includes/add-new-site.ejs' ) %>    
+            </div>
+        <% } else { %>
+            <h1>No Sites Found!</h1>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>

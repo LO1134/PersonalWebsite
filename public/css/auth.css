@@ -1,0 +1,92 @@
+.login-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+body {
+  /* Full height */
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 94% auto;
+}
+IMG.image-centered {
+  /* The image used */
+  background-image: url("https://www.nationalgeographic.com/content/dam/photography/photo-of-the-day/2020/05/pod-28-05-2020-nationalgeographic_936379.ngsversion.1589590688832.adapt.1900.1.jpg");
+
+  /* Full height */
+  height: 100%;
+  margin-top: 220px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+IMG.image-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1pt;
+  float: none;
+}
+/* Tooltip container */
+.tooltip {
+  position: absolute;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -100px;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 25;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -100px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+div.absolute {
+  position: absolute;
+  top: 300px;
+  right: 300px;
+  width: 500px;
+  height: 400px;
+  border-radius: 25px;
+}

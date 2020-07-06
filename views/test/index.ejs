@@ -1,0 +1,48 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/test.css">
+    <link rel="stylesheet" href="/css/energielogging.css">
+    <meta content="text/html; charset=ISO-8859-1"  http-equiv="content-type">
+    <title>Slimme meter uitlezen, vandaag</title>
+    <link rel="stylesheet" type="text/css"  href="/css/default.css">
+    <script src="/js/Rgraph/libraries/RGraph.common.core.js"></script>
+    <script src="/js/Rgraph/libraries/RGraph.bar.js"></script>              <!-- Just needed for Bar charts -->
+    <script src="/js/Rgraph/libraries/RGraph.common.dynamic.js"></script>   <!-- Just needed for dynamic features -->
+    <script src="/js/Rgraph/libraries/RGraph.common.annotate.js"></script>  <!-- Just needed for annotating -->
+    <script src="/js/Rgraph/libraries/RGraph.common.context.js"></script>   <!-- Just needed for context menus -->
+    <script src="/js/Rgraph/libraries/RGraph.common.effects.js"></script>   <!-- Just needed for visual effects -->
+    <script src="/js/Rgraph/libraries/RGraph.common.key.js"></script>       <!-- Just needed for keys -->
+    <script src="/js/Rgraph/libraries/RGraph.common.resizing.js"></script>  <!-- Just needed for resizing -->
+    <script src="/js/Rgraph/libraries/RGraph.common.tooltips.js"></script>  <!-- Just needed for tooltips -->
+    <script src="/js/Rgraph/libraries/RGraph.common.zoom.js"></script>      <!-- Just needed for zoom -->
+    <script src="/js/Rgraph/libraries/RGraph.line.js"></script>             Just needed for Line charts
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <script src="/js/Rgraph_test.js" defer ></script>  -->
+</head>
+<div id='d1' style="position:absolute; top:210px; left:25px; z-index:1">  
+    <canvas id="Rgraphcvs" width="981" height="409">[No canvas support]</canvas>
+  </div> 
+  
+<div id='d2' style="position:absolute; top:1px; left:25px; z-index:1"div> 
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main>
+ <div class="container">
+   <h1 class="display-4 mb-4" id="timer_data" id="ParagraaftobeChanged" ></h1> 
+   <div class="d-flex">
+    <!-- <button class="btn btn-primary mr-4" id="changeButton">Change Header text just for fun</button> -->
+    <button class="btn btn-success mr-4" id="changeLastNewsButton">Get latest electricity usage</button>
+    <button class="btn btn-warning mr-4" id="timer">Start Timer</button>
+    <button class="btn btn-dark mr-4" id="timer_stop">Stop Timer</button>
+    <button class="btn btn-primary mr-4" id="display_chart_button">Display Chart</button>
+  </div>  
+</div>
+ <p id="last_News_item"></p>
+ <p> </p>
+ <p id="timer_data"></p>
+ 
+    </main>
+<%- include('../includes/end.ejs') %>
+<script src="/js/test.js"></script> 

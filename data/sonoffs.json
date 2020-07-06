@@ -1,0 +1,2 @@
+[{"id":1, "title":"dit is een titel", "description":"desctriopty", "MQTTcommand":"mqttcommandhier", "date":"2019-10-11T15:38:59.960Z", "devicename":"ditisdeveivename", "status":0},
+ {"id":2, "title":"Sonoff R2 stekker", "description":"Losse stekker tasmota", "MQTTcommand":"CMND/DVES_B0B71e_fb", "date":"2019-10-11T15:48:46.777Z", "devicename":"Huiskamer_grote_lamp", "status":0}]
