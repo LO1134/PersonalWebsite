@@ -1,0 +1,103 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/sonoff.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main>
+    <div id="backdrop"></div>
+    <div class="modal card" id="add-modal">
+    <div class="modal__content">
+    <form action="/admin/add-sonoff" method="POST" enctype="multipart/form-data"> 
+    <div class="form-control">
+    <label for="title">Title</label>
+    <input 
+    type="text" name="title" id="titleNewSonoff" >
+    </div>
+    <div class="form-control">
+    <label for="host">Host</label>
+    <input type="text" name="host" id="hostNewSonoff" value="">
+    </div>
+    <div class="form-control">
+    <label for="MQTTtopic">MQTT topic</label>
+    <input 
+    type="text" name="MQTTtopic" id="MQTTtopicNewSonoff" >
+    </div>
+    <div class="form-control">
+    <label for="MQTTcommand">MQTTcommand toggle</label>
+    <input 
+    type="text" name="MQTTcommand" id="MQTTcommandNewSonoff" value="">
+    </div>
+    <div class="form-control">
+    <label for="MQTTcommandAAN">MQTTcommand - AAN</label>
+    <input type="text" name="MQTTcommandAAN" id="MQTTcommandAANNewSonoff" value="">
+    </div>
+    <div class="form-control">
+    <label for="MQTTcommand-UIT">MQTTcommand - UIT</label>
+    <input 
+    type="text" name="MQTTcommandUIT" id="MQTTcommandUITNewSonoff" value="">
+    </div>
+    <div class="form-control">
+    <label for="devicename">devicename</label>
+    <input 
+    type="text" name="devicename" id="devicenameNewSonoff" value="">
+    </div>
+    <div class="form-control">
+    <label for="image">Image</label>
+    <input 
+    type="file" 
+    name="image" 
+    id="image">
+    </div>
+    <div class="form-control">
+    <label for="description">Description</label>
+    <textarea 
+    name="description" id="descriptionNewSonoff" rows="5"></textarea>
+    </div>
+    </div>
+    <div class="modal__actions">
+    <button class="btn btn--passive">Cancel</button>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button class="btn btn--success" type="submit">Add</button>
+    </div>
+    </form>
+    </div>
+            <% if (sonoffs.length > 0) { %>
+        <div class="grid">
+            <% for (let sonoff of sonoffs) { %>
+                <article class="card sonoff-item">
+                    <header class="card__header">
+                        <h1 class="sonoff__devicename"><%= sonoff.title %></h1>
+                    </header> 
+                    <div class="card__image">
+                            <img src="/<%= sonoff.imageURL %>" alt="<%= sonoff.title %>">
+                    </div>
+
+                    <div class="card__content">
+                        <p class="sonoff__description"><%= sonoff.description %></p>
+                    </div>
+                    <div class="card__actions">
+                        <a href="/sonoffs/<%= sonoff.id %>" class="btn">Details</a>
+                    </div>
+                    <div class="card__actions">
+                        <a href="/sonoff_schedules/<%= sonoff.id %>" class="btn">Schedule</a>
+                    </div>
+                    <div class="card__actions">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="id" value="<%= sonoff.id %>">
+                        <button class="btn" type="button" id="button_id" onclick="sendMQTTcommand(this)">Toggle light</button>
+                    </div>
+                </article>
+            <% } %>
+        </div>
+        <div>
+            <%- include('../includes/add-new-sonoff.ejs' ) %>    
+        </div>
+            <% } else { %>
+                <h1>No Sonoffs Found!</h1>
+                <%- include('../includes/add-new-sonoff.ejs' ) %>    
+            <% } %> 
+    </main>
+<%- include('../includes/end.ejs') %>
+<script src="/js/admin.js"></script> 

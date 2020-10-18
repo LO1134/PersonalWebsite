@@ -2,7 +2,7 @@
   width: 30rem;
   max-width: 100%;
   margin: auto;
-  /* display: inline; */
+  /* display: inline; */ 
 }
 
 .sonoff-item {
@@ -241,6 +241,14 @@ label {
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.card__image {
+  height: 15rem;
+}
+
+.card__image img {
+  height: 100%;
 }
 
 .movie-element {
