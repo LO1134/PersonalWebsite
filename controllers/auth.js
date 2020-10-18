@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Logtab = require("../models/logtab");
 const Picture = require("../models/picureoftheday");
 
 const bcrypt = require("bcryptjs");
@@ -91,16 +92,47 @@ exports.postLogout = (req, res, next) => {
   });
 };
 
+logItemInLogtab = (email, password, result, ipaddress) => {
+  const currentTime = new Date();
+  if (ipaddress.substring(0, 7) === "::ffff:") {
+    ipaddress = ipaddress.substring(7, 21);
+  }
+  if (ipaddress !== "217.19.24.81" && ipaddress !== "::1") {
+    const logitem = new Logtab(
+      null,
+      email,
+      currentTime,
+      result,
+      password,
+      ipaddress
+    );
+    logitem
+      .save()
+      .then(() => {
+        console.log("item was saved");
+      })
+      .catch(err => {
+        const error = new Error(err);
+        console.log(error);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
+  }
+};
+
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const errors = validationResult(req);
-  // console.log(errors);
   if (!errors.isEmpty()) {
+    logItemInLogtab(email, password, 0, req.ip);
     return res.status(422).render("auth/login", {
       path: "/login",
       pageTitle: "Login",
       errorMessage: errors.array()[0].msg,
+      picture:
+        "https://thumbs.dreamstime.com/b/circle-do-not-enter-sign-wrong-way-octagonal-no-entry-vector-illustration-187335681.jpg",
+      description: " ",
       oldInput: {
         email: email,
         password: password,
@@ -108,14 +140,20 @@ exports.postLogin = (req, res, next) => {
       validationsErrors: errors.array(),
     });
   }
+  // log inlog details
+
   User.findByEmail(email)
     .then(([rows, fieldData]) => {
       if (rows.length <= 0) {
         //user not found
+        logItemInLogtab(email, password, 0, req.ip);
         return res.status(422).render("auth/login", {
           path: "/login",
           pageTitle: "Login",
           errorMessage: "Invalid email or password.",
+          picture:
+            "https://www.insidefranchisesuccess.com/wp-content/uploads/2017/10/questions.jpg",
+          description: " ",
           oldInput: {
             email: email,
             password: password,
@@ -129,13 +167,18 @@ exports.postLogin = (req, res, next) => {
         .then(doMatch => {
           if (doMatch) {
             req.session.isLoggedin = true;
+            logItemInLogtab(email, password, 1, req.ip);
             req.session.user = rows;
             res.redirect("/");
           } else {
+            logItemInLogtab(email, password, 0, req.ip);
             return res.status(422).render("auth/login", {
               path: "/login",
               pageTitle: "Login",
               errorMessage: "Invalid email or password.",
+              picture:
+                "https://www.insidefranchisesuccess.com/wp-content/uploads/2017/10/questions.jpg",
+              description: " ",
               oldInput: {
                 email: email,
                 password: password,

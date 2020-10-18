@@ -1,4 +1,26 @@
 const EnergieLogging = require("../models/energielogging");
+const Temperature = require("../models/temperaturelogging");
+
+getlatesttempvalue = () => {
+  const currentTime = new Date();
+  let currentTemperature;
+  Temperature.fetch_last_item_from_templogging()
+  .then(([rows, fieldData]) => {
+    const currentHumidity = rows[0].humidity;
+    currentTemperature = rows[0].temperature;
+    console.log("current time:",currentTime);
+    console.log("current temperature:",currentTemperature);
+    console.log("current humidity:",currentHumidity);
+    return[currentTemperature, currentHumidity];
+ })
+  .catch(err => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+
+  // return[currentTime,currentTemperature];
+};
 
 exports.getIndex = (req, res, next) => {
   EnergieLogging.fetchAlls_today()
@@ -77,12 +99,23 @@ exports.getIndex = (req, res, next) => {
       afgenomengem[0] = afgenomen[0];
       const grafiekData = new Array(afgenomengem, opgewektgem);
       // console.log("grafiekData", grafiekData);
+      Temperature.fetch_last_item_from_templogging()
+      .then(([rows, fieldData]) => {
+        const currentTime = new Date();
+        const currentHumidity = rows[0].humidity;
+        const currentTemperature = rows[0].temperature;
+        // console.log("current time:",currentTime);
+        // console.log("current temperature:",currentTemperature);
+        // console.log("current humidity:",currentHumidity);
       res.render("energielogging/index", {
         grafiekdata: grafiekData,
         labels: labels,
         hoogste: hoogste,
         laagste: laagste,
         count: rows.length,
+        currentTime: currentTime,
+        currentHumidity: currentHumidity,
+        currentTemperature: currentTemperature,
         firstafgenomen: FirstAfgenomen,
         lastafgenomen: LastAfgenomen,
         firstopgewekt: FirstOpgewekt,
@@ -94,8 +127,9 @@ exports.getIndex = (req, res, next) => {
         uur,
         minute,
         pageTitle: "EnergieLogging",
-        path: "/energielogging"
+        path: "/energielogging",
       });
+     })
     })
     .catch(err => {
       const error = new Error(err);
@@ -172,7 +206,7 @@ exports.getDailyOverview = (req, res, next) => {
         euroMin,
         euroPlus,
         pageTitle: "Daily overview",
-        path: "/energie_daily_overview"
+        path: "/energie_daily_overview",
       });
     })
     .catch(err => {
@@ -198,7 +232,7 @@ exports.getMonthlyOverview = (req, res, next) => {
         " ",
         " ",
         " ",
-        " "
+        " ",
       ];
       const jaardata = [
         { jaar: "2017", afgenomen: 3838, opgewekt: 801 },
@@ -209,8 +243,8 @@ exports.getMonthlyOverview = (req, res, next) => {
           afgenomen: 0,
           opgewekt: 0,
           beginstandopgewekt: 4254,
-          beginstandafgenomen: 13409
-        }
+          beginstandafgenomen: 13409,
+        },
       ];
 
       const kWattcosts = 0.2009;
@@ -305,7 +339,7 @@ exports.getMonthlyOverview = (req, res, next) => {
             eindstandafgenomen: varafgenomen,
             eindstandopgewekt: varopgewekt,
             pageTitle: "Daily overview",
-            path: "/energie_monthly_overview"
+            path: "/energie_monthly_overview",
           });
         }
       );

@@ -2,24 +2,24 @@
 const db = require("../util/raspberrypidb");
 
 module.exports = class Logtab {
-  constructor(id, loginName, loginTime, password, result, IPAddress) {
+  constructor(id, loginName, loginTime, result, password, IPAddress) {
     this.id = id;
     this.loginName = loginName;
     this.loginTime = loginTime;
-    this.password = password;
     this.result = result;
+    this.password = password;
     this.IPAddress = IPAddress;
   }
 
   save() {
     return db.execute(
-      "INSERT INTO logtab (loginName, loginTime, password, result) VALUES (?, ?, ?, ?, ?)",
+      "INSERT INTO logtab (loginName, loginTime, result, password, IPAddress) VALUES (?, ?, ?, ?, ?)",
       [
         this.loginName,
         this.loginTime,
-        this.password,
         this.result,
-        this.IPAddress
+        this.password,
+        this.IPAddress,
       ]
     );
   }

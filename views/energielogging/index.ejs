@@ -18,6 +18,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/js/FeedEK/FeedEk.min.js"></script>
     <script type="text/javascript" src="/js/energielogging.js" defer></script>
+    <link rel="stylesheet" href="/css/weatherdata.css">
 </head>
 <div id='d1' style="position:absolute; top:170px; left:25px; z-index:1">  
     <canvas id="cvs" width="981" height="409">[No canvas support]</canvas>
@@ -68,14 +69,23 @@
 </script>
 <div id='d2' style="position:absolute; top:1px; left:25px; z-index:1"div>  
 
-<body>
+<body> 
     <%- include('../includes/navigation.ejs') %>
     <%- include('../includes/navigation-energie.ejs') %>
 
     <main>
-        <p>Total count of items: <%= count %></p>
     <section>
+        <div class="gauge-section" id='d2' style="position:absolute; top:6px; left:780px; z-index:1">  
+            <h5>Humidity</h5>
+             <div id="hum" class="gauge"></div>
+        </div>
 
+        <div class="gauge-section" id='d2' style="position:absolute; top:6px; left:930px; z-index:1"> 
+             <h5>Temp</h5>
+             <div id="temp" class="gauge"></div>
+        </div>
+    </section>
+    <section>
         <div id='d2' style="position:absolute; top:600px; left:25px; z-index:1"div>  
 
             <p>
@@ -107,3 +117,4 @@
 
     </main>
 <%- include('../includes/end.ejs') %>
+<script src="/js/weatherdata.js"></script>

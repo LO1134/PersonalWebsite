@@ -12,7 +12,7 @@
         <form class="sonoff-form" 
             action="/admin/add-sonoff" method="POST" enctype="multipart/form-data">            
             <div class="form-control">
-                <label for="title">Title</label>
+                <label for="title">Title</label> 
                 <input 
                 class="<%= validationsErrors.find(e => e.param === 'title') ? 'invalid' : '' %>"
                 type="text" name="title" id="title" value="<%= oldInput.title %>">
@@ -21,7 +21,8 @@
                 <label for="host">Host</label>
                 <input 
                 class="<%= validationsErrors.find(e => e.param === 'host') ? 'invalid' : '' %>"
-                type="text" name="host" id="host" value=`${process.env.MQTT_ADRRESS}`>
+                type="text" name="host" id="host" value="<%= MQTT_ADRRESS %>">
+            
             </div> 
             <div class="form-control">
                 <label for="MQTTtopic">MQTT topic</label>

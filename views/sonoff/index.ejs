@@ -1,6 +1,5 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/sonoff.css">
-    <link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body>
@@ -10,38 +9,58 @@
         <div id="backdrop"></div>
         <div class="modal card" id="add-modal">
           <div class="modal__content">
-                <label for="title">Title</label>
-                <input 
-                type="text" name="title" id="titleNewSonoff" >
-                <label for="host">Host</label>
-                <input type="text" name="host" id="hostNewSonoff" value='${MQTT_ADRRESS}'>
-                <label for="MQTTtopic">MQTT topic</label>
-                <input 
-                type="text" name="MQTTtopic" id="MQTTtopicNewSonoff" >
+            <form action="/admin/add-sonoff" method="POST" enctype="multipart/form-data"> 
+                <div class="form-control">
+                  <label for="title">Title</label>
+                 <input 
+                  type="text" name="title" id="titleNewSonoff" >
+                </div>
+                <div class="form-control">
+                 <label for="host">Host</label>
+                 <input type="text" name="host" id="hostNewSonoff" value="">
+                </div>
+                <div class="form-control">
+                   <label for="MQTTtopic">MQTT topic</label>
+                   <input 
+                   type="text" name="MQTTtopic" id="MQTTtopicNewSonoff" >
+                </div>
+                <div class="form-control">
                 <label for="MQTTcommand">MQTTcommand toggle</label>
                 <input 
                 type="text" name="MQTTcommand" id="MQTTcommandNewSonoff" value="">
+                </div>
+                <div class="form-control">
                 <label for="MQTTcommandAAN">MQTTcommand - AAN</label>
                 <input type="text" name="MQTTcommandAAN" id="MQTTcommandAANNewSonoff" value="">
+                </div>
+                <div class="form-control">
                 <label for="MQTTcommand-UIT">MQTTcommand - UIT</label>
                 <input 
                 type="text" name="MQTTcommandUIT" id="MQTTcommandUITNewSonoff" value="">
+            </div>
+            <div class="form-control">
                 <label for="devicename">devicename</label>
                 <input 
                 type="text" name="devicename" id="devicenameNewSonoff" value="">
+            </div>
+            <div class="form-control">
                 <label for="image">Image</label>
                 <input 
                 type="file" 
                 name="image" 
                 id="image">
+            </div>
+            <div class="form-control">
                 <label for="description">Description</label>
                 <textarea 
                 name="description" id="descriptionNewSonoff" rows="5"></textarea>
+            </div>
           </div>
           <div class="modal__actions">
             <button class="btn btn--passive">Cancel</button>
-            <button class="btn btn--success">Add</button>
+            <button class="btn btn--success" type="submit">Add</button>
           </div>
+        </form>
         </div>
             <% if (sonoffs.length > 0) { %>
         <div class="grid">

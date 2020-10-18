@@ -25,7 +25,7 @@ display_chart = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(graphqlQuery),
+      body: JSON.stringify(graphqlQuery), 
     });
     const resData = await response.json();
     grafiekdata = resData.data.valuesPerday;

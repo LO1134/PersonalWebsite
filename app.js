@@ -48,6 +48,7 @@ const energieloggingRoutes = require("./routes/energielogging");
 const authRoutes = require("./routes/auth");
 const apiRoutes = require("./routes/api");
 const temperatureRoutes = require("./routes/temperaturelogging");
+const webhookRoutes = require("./routes/webhook");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
@@ -90,6 +91,7 @@ app.use(apiRoutes);
 app.use(testRoutes);
 app.use(temperatureRoutes);
 app.use(sunanalysisRoutes);
+app.use(webhookRoutes);
 app.use(errorController.get404);
 
 app.listen(3010);
