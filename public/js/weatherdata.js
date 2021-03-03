@@ -175,7 +175,7 @@ async function gettemperaturefromDb() {
       `,
   };
 
-  const response = await fetch("http://217.19.24.81:3000/graphql", {
+  const response = await fetch("http://217.19.24.81:3001/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

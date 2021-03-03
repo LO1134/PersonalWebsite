@@ -20,12 +20,12 @@ display_chart = () => {
       `,
     };
 
-    const response = await fetch("http://217.19.24.81:3000/graphql", {
+    const response = await fetch("http://217.19.24.81:3001/graphql", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(graphqlQuery), 
+      body: JSON.stringify(graphqlQuery),
     });
     const resData = await response.json();
     grafiekdata = resData.data.valuesPerday;

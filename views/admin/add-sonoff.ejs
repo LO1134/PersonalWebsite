@@ -21,7 +21,7 @@
                 <label for="host">Host</label>
                 <input 
                 class="<%= validationsErrors.find(e => e.param === 'host') ? 'invalid' : '' %>"
-                type="text" name="host" id="host" value="<%= MQTT_ADRRESS %>">
+                type="text" name="host" id="host" value="<%= oldInput.title %>">
             
             </div> 
             <div class="form-control">

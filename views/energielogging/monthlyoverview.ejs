@@ -28,7 +28,7 @@
         data:[<% for(var i=0; i < grafiekdata.length; i++) { %>[<%= grafiekdata[i] %>],<% } %>],
         options: {
             labels: [<% for(var i=0; i < labels.length; i++) { %>'<%= labels[i] %>',<% } %>],
-            title: 'Energie per maand from jan 2017 - 2019 (kWh)',           
+            title: 'Energie per maand from jan 2017 - 2021 (kWh)',           
             colors: ['red', 'green'],
             hmargin: 3,
             strokestyle: 'rgba(0,0,0,0)',
@@ -78,28 +78,31 @@
    <th>2018</th>
    <th>2019</th>
    <th>2020</th>
+   <th>2021</th>
     </tr>
    <tr>
    <th>Datum</th>
-   <th>01-01-2020</th>
+   <th>01-01-2021</th>
    <th><%= new Date(LaatsteDatum).toDateString(); %> </th>
    </tr>
    <tr>
    <td>Afgenomen</td>
-   <td><%= JSON.stringify(jaardata[3].beginstandafgenomen) %></td>
+   <td><%= JSON.stringify(jaardata[4].beginstandafgenomen) %></td>
    <td><%= LastiAfgenomen %> </td>
    <td><%= JSON.stringify(jaardata[0].afgenomen) %></td>
    <td><%= JSON.stringify(jaardata[1].afgenomen) %></td>
    <td><%= JSON.stringify(jaardata[2].afgenomen) %></td>
+   <td><%= JSON.stringify(jaardata[3].afgenomen) %></td>
    <td><%= eindstandafgenomen %> </td> 
    </tr>
    <tr>
    <td>Opgewekt</td>
-   <td><%= JSON.stringify(jaardata[3].beginstandopgewekt) %></td>
+   <td><%= JSON.stringify(jaardata[4].beginstandopgewekt) %></td>
    <td><%= Lastipgewekt %> </td> 
    <td><%= JSON.stringify(jaardata[0].opgewekt) %></td>
    <td><%= JSON.stringify(jaardata[1].opgewekt) %></td>
    <td><%= JSON.stringify(jaardata[2].opgewekt) %></td>
+   <td><%= JSON.stringify(jaardata[3].opgewekt) %></td>
    <td><%= eindstandopgewekt %></td>
    </tr>
    <tr>
